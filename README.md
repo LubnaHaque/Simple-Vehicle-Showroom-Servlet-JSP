@@ -1,2 +1,2 @@
-# Simple-Vehicle-Showroom-servlet-jsp-
+# Simple-Vehicle-Showroom-Servlet-JSP
 users can just add,remove and see the vehicle list
