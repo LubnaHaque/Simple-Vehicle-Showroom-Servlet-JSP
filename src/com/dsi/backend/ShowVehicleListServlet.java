@@ -22,13 +22,13 @@ import com.dsi.backend.Dao.QuerySomethingDao;
 public class ShowVehicleListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String showRoomId = session.getAttribute("showRoomId").toString();
-		String query = "select* from trial_vehicle_table where show_room_id = ?";
 		
-		QuerySomethingDao giveSomething = new QuerySomethingDao();
-		giveSomething.passData(showRoomId);
-		ResultSet rs = giveSomething.vehicleList(query);
+		HttpSession session = request.getSession();
+		
+		String userName = session.getAttribute("userName").toString();
+		String query = "select* from trial_vehicle_table where user_name=?";
+		
+		ResultSet rs = QuerySomethingDao.vehicleList(query,userName);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("showVehicleList.jsp");
 		request.setAttribute("resultSet", rs);

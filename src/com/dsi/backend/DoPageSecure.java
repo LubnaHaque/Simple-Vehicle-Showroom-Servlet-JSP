@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 public class DoPageSecure {
 	
 	public static boolean ifLogin(HttpSession session) {
-		if(session.getAttribute("showRoomId") == null){
+		if(session.getAttribute("userName") == null){
 			return false;
 		}
 		return true;

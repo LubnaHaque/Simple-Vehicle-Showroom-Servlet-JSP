@@ -1,4 +1,4 @@
-<%@page import="com.dsi.backend.Dao.LoginDao"%>
+
 <%@page import="com.dsi.backend.DoPageSecure"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
 		response.sendRedirect("login.jsp");
 	}
 	else{
-		String username = LoginDao.getUserName(session.getAttribute("showRoomId").toString());
+		String username = session.getAttribute("userName").toString();
 		out.println("Welcome " + username);
 	}
 	

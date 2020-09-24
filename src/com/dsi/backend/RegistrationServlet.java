@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dsi.backend.Dao.PasswordHashing;
 import com.dsi.backend.Dao.QuerySomethingDao;
 
 /**
@@ -22,9 +23,10 @@ public class RegistrationServlet extends HttpServlet {
 		String userName = request.getParameter("user_name");
 		String password = request.getParameter("password");
 		
-		QuerySomethingDao dao = new QuerySomethingDao();
+		password = PasswordHashing.doMD5Hash(password);
+		
 		String query ="insert into users values(?,?,?,?)";
-		int row = dao.createUser(query , showRomId , fullName , userName,password);
+		int row = QuerySomethingDao.createUser(query , showRomId , fullName , userName,password);
 		if(row != 0) {
 			System.out.println("the user is created successfully!");
 		}

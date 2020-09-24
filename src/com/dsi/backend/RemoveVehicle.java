@@ -19,14 +19,13 @@ public class RemoveVehicle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		String showRoomId = session.getAttribute("showRoomId").toString();
-		String modelNuber = request.getParameter("model_number");
-		String query = "delete from trial_vehicle_table where show_room_id=? && model_number=?";
+		String userName = session.getAttribute("userName").toString();
+		String modelNumber = request.getParameter("model_number");
+		String query = "delete from trial_vehicle_table where user_name=? && model_number=?";
 		
-		QuerySomethingDao delete = new QuerySomethingDao();
-		int row = delete.deleteVehicle(showRoomId, modelNuber, query);
+		int row = QuerySomethingDao.deleteVehicle(userName, modelNumber, query);
 		
-		System.out.println(row + " row(s) affected.");
+		System.out.println(row + " row(s) affected(removed)");
 		response.sendRedirect("home.jsp");
 	}
 

@@ -20,7 +20,7 @@ public class AddVehicleServlet extends HttpServlet {
 		
 		//fetch values
 		HttpSession session = request.getSession();
-		String showRoomId = session.getAttribute("showRoomId").toString();
+		String userName = session.getAttribute("userName").toString();
 		String modelNumber = request.getParameter("model");
 		String vehicleType = request.getParameter("vehicle_type");
 		String engineType = request.getParameter("engine_type");
@@ -29,10 +29,9 @@ public class AddVehicleServlet extends HttpServlet {
 		
 		//call metohd
 		String query = "insert into trial_vehicle_table values(?,?,?,?,?,?)";
-		QuerySomethingDao takeSomething = new QuerySomethingDao();
-		takeSomething.passData(showRoomId, modelNumber, vehicleType, engineType, enginePower, tireSize);
-		int count = takeSomething.insertData(query);
-		System.out.println(count + " row(s) are affected");
+		
+		int count = QuerySomethingDao.insertData(query,userName, modelNumber, vehicleType, engineType, enginePower, tireSize);
+		System.out.println(count + " row(s) are affected(added)");
 		
 		response.sendRedirect("home.jsp");
 	}

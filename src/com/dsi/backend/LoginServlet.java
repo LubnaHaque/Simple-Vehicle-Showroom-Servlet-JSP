@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dsi.backend.Dao.LoginDao;
 import com.dsi.backend.Dao.MyConnection;
+import com.dsi.backend.Dao.PasswordHashing;
+import com.dsi.backend.Dao.QuerySomethingDao;
 
 /**
  * Servlet implementation class LoginServlet
@@ -20,19 +21,22 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//Retrieve users' input
-		String showRoomId = request.getParameter("show_room_id");
+		String userName = request.getParameter("user_name");
 		String password = request.getParameter("password");
 		
+		password = PasswordHashing.doMD5Hash(password);
+		String query = "select * from users where user_name = ? && password = ?";
 		
-		if(LoginDao.isValidUser(showRoomId, password)) {
+		if(QuerySomethingDao.isValidUser(query ,userName, password)) {
 			//to do page secure
 			HttpSession session = request.getSession();
-			session.setAttribute("showRoomId", showRoomId);
+			session.setAttribute("userName", userName);
 			
-			
+			System.out.println("login successfully!");
 			response.sendRedirect("home.jsp");
 		}
 		else {
+			System.out.println("login failed!");
 			response.sendRedirect("login.jsp");
 		}
 	}

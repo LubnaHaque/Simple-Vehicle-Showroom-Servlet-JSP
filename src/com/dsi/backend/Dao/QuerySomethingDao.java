@@ -10,32 +10,30 @@ import javax.servlet.http.HttpSession;
 
 public class QuerySomethingDao {
 	
-	String showRoomId;
-	String modelNumber;
-	String vehicleType;
-	String engineType;
-	int enginePower;
-	int tireSize;
-	
-	public void passData(String showRoomId2,String modelNumber2,String vehicleType2,String engineType2, int enginePower2,int tireSize2) {
-		showRoomId = showRoomId2;
-		modelNumber = modelNumber2;
-		vehicleType = vehicleType2;
-		engineType= engineType2;
-		enginePower = enginePower2;
-		tireSize = tireSize2;
+	public static boolean isValidUser(String query , String userName , String password) {
+		Connection con = MyConnection.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1, userName);
+			pst.setString(2, password);
+			
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
-	public void passData(String showRoomId2) {
-		showRoomId = showRoomId2;
-	}
-	
-	public int insertData(String query) {
+	public static int insertData(String query,String userName,String modelNumber,String vehicleType,String engineType,int enginePower,int tireSize) {
 		Connection con = MyConnection.getConnection();
 		int affectedRow = 0;
 		try {
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1, showRoomId);
+			pst.setString(1, userName);
 			pst.setString(2, modelNumber);
 			pst.setString(3, vehicleType);
 			pst.setString(4, engineType);
@@ -44,41 +42,41 @@ public class QuerySomethingDao {
 			
 			affectedRow = pst.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return affectedRow;
 	}
 	
-	public ResultSet vehicleList(String query) {
+	public static ResultSet vehicleList(String query,String userName) {
 		ResultSet rs =null;
 		Connection con = MyConnection.getConnection();
 		try {
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1, showRoomId);
+			pst.setString(1, userName);
 			rs = pst.executeQuery();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return rs;
 	}
 	
-	public int deleteVehicle(String showRoomId , String modelNumber , String query) {
+	public static int deleteVehicle(String userName , String modelNumber , String query) {
 		int row = 0;
 		Connection con = MyConnection.getConnection();
 		try {
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1, showRoomId);
+			pst.setString(1, userName);
 			pst.setString(2, modelNumber);
 			
 			row = pst.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return row;
 	}
 
-	public int createUser(String query , String showRoomId,String fullName,String userName,String password) {
+	public static int createUser(String query , String showRoomId,String fullName,String userName,String password) {
 		Connection con = MyConnection.getConnection();
 		int row = 0;
 		try {
@@ -91,7 +89,7 @@ public class QuerySomethingDao {
 			row = pst.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		return row;
