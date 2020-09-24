@@ -78,4 +78,22 @@ public class QuerySomethingDao {
 		return row;
 	}
 
+	public int createUser(String query , String showRoomId,String fullName,String userName,String password) {
+		Connection con = MyConnection.getConnection();
+		int row = 0;
+		try {
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1, showRoomId);
+			pst.setString(2, fullName);
+			pst.setString(3, userName);
+			pst.setString(4, password);
+			
+			row = pst.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
 }

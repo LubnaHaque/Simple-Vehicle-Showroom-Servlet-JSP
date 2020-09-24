@@ -39,5 +39,6 @@ while(rs.next()){
 }
 
 %>
+<%@include file="logout.jsp" %>
 </body>
 </html>

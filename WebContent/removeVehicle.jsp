@@ -19,5 +19,6 @@
 	<input type="text" name="model_number" placeholder="model number" required="required"><br>
 	<input type="submit">
 </form>
+<%@include file="logout.jsp" %>
 </body>
 </html>

@@ -11,7 +11,8 @@
 <form action="login" method="post">
 	<input type="text" name="show_room_id" placeholder="show room ID" required="required"><br>
 	<input type="password" name="password" placeholder="password" required="required"><br>
-	<input type="submit" value="Login">	
+	<input type="submit" value="Login"><br>
+	<label>not register?</label><a href="registration.jsp">Register here</a>
 </form>
 
 </body>
