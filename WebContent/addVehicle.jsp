@@ -34,9 +34,9 @@
 	
 	</select><br>
 	
-	<input type="number" name="engine_power" placeholder="engine power" required="required"><br>
+	<input type="number" name="engine_power" onkeypress="return event.charCode >= 48" min="1"" placeholder="engine power" required="required"><br>
 	
-	<input type="number" name="tire_size" placeholder="tire size" required="required"><br>
+	<input type="number" name="tire_size" onkeypress="return event.charCode >= 48" min="1"" placeholder="tire size" required="required"><br>
 	
 	<input type="submit">
 </form>

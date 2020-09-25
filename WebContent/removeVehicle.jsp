@@ -19,8 +19,9 @@
 <form action="removeVehicle">
 	<input type="text" name="model_number" placeholder="model number" required="required"><br>
 	<input type="submit">
-	<%@include file="logout.jsp" %>
+	
 	<label>forgot model number?</label><a href="showVehicleList">see here</a>
 </form>
+<%@include file="logout.jsp" %>
 </body>
 </html>
