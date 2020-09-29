@@ -21,16 +21,36 @@ public class AddVehicleServlet extends HttpServlet {
 		//fetch values
 		HttpSession session = request.getSession();
 		String userName = session.getAttribute("userName").toString();
+		
 		String modelNumber = request.getParameter("model");
 		String vehicleType = request.getParameter("vehicle_type");
-		String engineType = request.getParameter("engine_type");
+		String engineType = null;
+		String turbo = "N/A";
+		int weight = 0;
+		switch (vehicleType) {
+		case "normal":
+			engineType = request.getParameter("engine_type");
+			break;
+		case "sports":
+			turbo = request.getParameter("turbo");
+			engineType = "oil";
+			break;
+		case "heavy":
+			weight = Integer.parseInt(request.getParameter("weight"));
+			engineType = "diesel";
+			break;
+		default:
+			break;
+		}
 		int enginePower = Integer.parseInt(request.getParameter("engine_power"));
 		int tireSize = Integer.parseInt(request.getParameter("tire_size"));
 		
-		//call metohd
-		String query = "insert into trial_vehicle_table values(?,?,?,?,?,?)";
 		
-		int count = QuerySomethingDao.insertData(query,userName, modelNumber, vehicleType, engineType, enginePower, tireSize);
+		System.out.println(modelNumber + " " + vehicleType + " " + engineType + " " + turbo + " " + weight + " " + enginePower + " " + tireSize);
+		//call metohd
+		String query = "insert into trial_vehicle_table2 values(?,?,?,?,?,?,?,?)";
+		
+		int count = QuerySomethingDao.insertData(query,userName, modelNumber, vehicleType, engineType, turbo, weight, enginePower, tireSize);
 		System.out.println(count + " row(s) are affected(added)");
 		
 		response.sendRedirect("home.jsp");

@@ -28,7 +28,7 @@ public class QuerySomethingDao {
 		return false;
 	}
 	
-	public static int insertData(String query,String userName,String modelNumber,String vehicleType,String engineType,int enginePower,int tireSize) {
+	public static int insertData(String query,String userName,String modelNumber,String vehicleType,String engineType, String turbo, int weight, int enginePower,int tireSize) {
 		Connection con = MyConnection.getConnection();
 		int affectedRow = 0;
 		try {
@@ -37,8 +37,10 @@ public class QuerySomethingDao {
 			pst.setString(2, modelNumber);
 			pst.setString(3, vehicleType);
 			pst.setString(4, engineType);
-			pst.setInt(5, enginePower);
-			pst.setInt(6, tireSize);
+			pst.setString(5, turbo);
+			pst.setInt(6, weight);
+			pst.setInt(7, enginePower);
+			pst.setInt(8, tireSize);
 			
 			affectedRow = pst.executeUpdate();
 		} catch (Exception e) {

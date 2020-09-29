@@ -26,7 +26,7 @@ public class ShowVehicleListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String userName = session.getAttribute("userName").toString();
-		String query = "select* from trial_vehicle_table where user_name=?";
+		String query = "select* from trial_vehicle_table2 where user_name=?";
 		
 		ResultSet rs = QuerySomethingDao.vehicleList(query,userName);
 		

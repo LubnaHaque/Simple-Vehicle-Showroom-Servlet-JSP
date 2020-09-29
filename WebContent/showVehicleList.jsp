@@ -28,10 +28,12 @@ while(rs.next()){
 	String vehicleType = rs.getString("vehicle_type");
 	String engineType = rs.getString("engine_type");
 	String modelNumber = rs.getString("model_number");
+	String turbo = rs.getString("turbo");
+	int weight = Integer.parseInt(rs.getString("weight"));
 	int enginePower = Integer.parseInt(rs.getString("engine_power"));
 	int tireSize = Integer.parseInt(rs.getString("tire_size"));
 	
-	Vehicle vehicle = new Vehicle(vehicleType,engineType,modelNumber,enginePower,tireSize);
+	Vehicle vehicle = new Vehicle(vehicleType,engineType,modelNumber,turbo,weight,enginePower,tireSize);
 	out.print(vehicle);
 	%>
 	<br>

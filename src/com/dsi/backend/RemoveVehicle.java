@@ -21,7 +21,7 @@ public class RemoveVehicle extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userName = session.getAttribute("userName").toString();
 		String modelNumber = request.getParameter("model_number");
-		String query = "delete from trial_vehicle_table where user_name=? && model_number=?";
+		String query = "delete from trial_vehicle_table2 where user_name=? && model_number=?";
 		
 		int row = QuerySomethingDao.deleteVehicle(userName, modelNumber, query);
 		
