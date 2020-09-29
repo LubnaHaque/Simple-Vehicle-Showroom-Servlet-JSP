@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,8 +54,20 @@ public class AddVehicleServlet extends HttpServlet {
 		
 		int count = QuerySomethingDao.insertData(query,userName, modelNumber, vehicleType, engineType, turbo, weight, enginePower, tireSize);
 		System.out.println(count + " row(s) are affected(added)");
-		
-		response.sendRedirect("home.jsp");
+		PrintWriter out = response.getWriter();
+		if(count != 0) {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('added successfully!');");
+	        out.println("location='home.jsp';");
+	        out.println("</script>");
+		}
+		else {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('failed to add!');");
+	        out.println("location='home.jsp';");
+	        out.println("</script>");
+		}
+//		response.sendRedirect("home.jsp");
 	}
 
 }

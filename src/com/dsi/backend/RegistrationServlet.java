@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,14 +29,23 @@ public class RegistrationServlet extends HttpServlet {
 		
 		String query ="insert into users values(?,?,?,?)";
 		int row = QuerySomethingDao.createUser(query , showRomId , fullName , userName,password);
+		PrintWriter out = response.getWriter();
 		if(row != 0) {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('successfully created the user!');");
+	        out.println("location='login.jsp';");
+	        out.println("</script>");
 			System.out.println("the user is created successfully!");
 		}
 		else {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('failed tocreate the user!');");
+	        out.println("location='login.jsp';");
+	        out.println("</script>");
 			System.out.println("The user is not created");
 		}
 		
-		response.sendRedirect("login.jsp");
+//		response.sendRedirect("login.jsp");
 	}
 
 }

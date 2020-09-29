@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,13 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("userName");
 		session.invalidate();
 		System.out.println(userName + ", you are logged out!");
-		response.sendRedirect("login.jsp");
+		
+		PrintWriter out = response.getWriter();
+		out.println("<script type=\"text/javascript\">");
+        out.println("alert('you are logged out!');");
+        out.println("location='login.jsp';");
+        out.println("</script>");
+//		response.sendRedirect("login.jsp");
 	}
 
 }

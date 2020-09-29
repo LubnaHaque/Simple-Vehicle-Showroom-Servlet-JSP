@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +38,12 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("home.jsp");
 		}
 		else {
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('username or password is incorrect!');");
+	        out.println("location='login.jsp';");
+	        out.println("</script>");
 			System.out.println("login failed!");
-			response.sendRedirect("login.jsp");
 		}
 	}
 

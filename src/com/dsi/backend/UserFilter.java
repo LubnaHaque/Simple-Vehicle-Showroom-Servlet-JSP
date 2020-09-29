@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -31,8 +33,13 @@ public class UserFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		else {
-			res.sendRedirect("registration.jsp");
-			System.out.println("username's or password's length is greater or less!");
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('username or password length is greater or less! it should be between 3 to 10');");
+	        out.println("location='registration.jsp';");
+	        out.println("</script>");
+//			res.sendRedirect("registration.jsp");
+			System.out.println("username or password's length is greater or less!");
 			System.out.println("it should be between 3 to 10");
 		}
 	}

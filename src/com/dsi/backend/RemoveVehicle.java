@@ -1,6 +1,8 @@
 package com.dsi.backend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +26,22 @@ public class RemoveVehicle extends HttpServlet {
 		String query = "delete from trial_vehicle_table2 where user_name=? && model_number=?";
 		
 		int row = QuerySomethingDao.deleteVehicle(userName, modelNumber, query);
+		PrintWriter out = response.getWriter();
 		
+		if(row != 0) {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('removed the expected vehicle!');");
+	        out.println("location='home.jsp';");
+	        out.println("</script>");
+		}
+		else {
+			out.println("<script type=\"text/javascript\">");
+	        out.println("alert('the model number doesnot exits!');");
+	        out.println("location='home.jsp';");
+	        out.println("</script>");
+		}
 		System.out.println(row + " row(s) affected(removed)");
-		response.sendRedirect("home.jsp");
+//		response.sendRedirect("home.jsp");
 	}
 
 }
